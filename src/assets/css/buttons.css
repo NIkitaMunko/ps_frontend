@@ -41,33 +41,33 @@
     top: -20px;
     left: 50%;
     transform: translateX(-50%);
-    background-image: url('/src/assets/images/arrows/up-arrow.png');
+    background-image: url('/assets/images/arrows/up-arrow.png');
 }
 
 .left {
     left: -20px;
     top: 50%;
     transform: translateY(-50%);
-    background-image: url('/src/assets/images/arrows/left-arrow.png');
+    background-image: url('/assets/images/arrows/left-arrow.png');
 }
 
 .right {
     right: -20px;
     top: 50%;
     transform: translateY(-50%);
-    background-image: url('/src/assets/images/arrows/right-arrow.png');
+    background-image: url('/assets/images/arrows/right-arrow.png');
 }
 
 .down {
     bottom: -20px;
     left: 50%;
     transform: translateX(-50%);
-    background-image: url('/src/assets/images/arrows/down-arrow.png');
+    background-image: url('/assets/images/arrows/down-arrow.png');
 }
 
 .center {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-image: url('/src/assets/images/arrows/reload-arrow.png');
+    background-image: url('/assets/images/arrows/reload-arrow.png');
 }
