@@ -27,72 +27,35 @@ export class AppComponent implements OnInit {
   tempName: string;
   currentRating: number = 0;
 
-  constructor(private gameService: GameService) {}
+  constructor(private gameService: GameService) {
+  }
 
   ngOnInit() {
-    this.gameService.getGameState(undefined, undefined, this.playerName, undefined, undefined)
-      .subscribe(
-        (data) => {
-          this.values = data.field;
-          this.frameNumbers = data.frameNumbers;
-          this.isSolved = data.isSolved;
-          this.rating = data.rating;
-          this.player_rating = data.player_rating;
-          this.playerName = data.playerName;
-          console.log(data);
-        },
-      );
+    this.loadGameData();
   }
 
   moveTile(direction: string): void {
-    this.gameService.getGameState(direction, false, this.playerName, undefined, undefined)
-      .subscribe(
-        (data) => {
-          this.values = data.field;
-          this.frameNumbers = data.frameNumbers;
-          this.isSolved = data.isSolved;
-          this.rating = data.rating;
-          this.player_rating = data.player_rating;
-          this.playerName = data.playerName;
-        },
-      );
+    this.loadGameData({direction});
   }
 
   reset(): void {
-    this.gameService.getGameState(undefined, true, this.playerName, undefined, undefined)
-      .subscribe(
-        (data) => {
-          this.values = data.field;
-          this.frameNumbers = data.frameNumbers;
-          this.isSolved = data.isSolved;
-          this.rating = data.rating;
-          this.player_rating = data.player_rating;
-          this.playerName = data.playerName;
-        },
-      );
+    this.loadGameData({reset: true});
   }
 
   setPlayerName(): void {
     this.playerName = this.tempName;
-    this.gameService.getGameState(undefined, false, this.playerName, undefined, undefined)
-      .subscribe(
-        (data) => {
-          this.values = data.field;
-          this.frameNumbers = data.frameNumbers;
-          this.isSolved = data.isSolved;
-          this.rating = data.rating;
-          this.player_rating = data.player_rating;
-          this.playerName = data.playerName;
-        },
-      );
+    this.loadGameData();
   }
 
   submitRating(): void {
     if (this.currentRating > 10) this.currentRating = 10;
     else if (this.currentRating < 1) this.currentRating = 1;
-    this.player_rating = this.currentRating
+    this.player_rating = this.currentRating;
+    this.loadGameData({rating: this.player_rating.toString()});
+  }
 
-    this.gameService.getGameState(undefined, false, this.playerName, undefined, this.player_rating.toString())
+  private loadGameData(params: { direction?: string; reset?: boolean; comment?: string; rating?: string; } = {}) {
+    this.gameService.getGameState(params.direction, params.reset || false, this.playerName, params.comment, params.rating)
       .subscribe(
         (data) => {
           this.values = data.field;
