@@ -1,6 +1,39 @@
-<h1>{{ title }}</h1>
-
-<div *ngIf="comments$ | async as comments">
-  <app-product *ngFor="let comment of comments" [comment]="comment"></app-product>
+<div class="form-container" *ngIf="!playerName">
+  <form (ngSubmit)="setPlayerName()">
+    <label for="playerName">Please, enter your name:</label>
+    <input
+      type="text"
+      placeholder="name..."
+      name="pn"
+      [(ngModel)]="tempName"
+    />
+    <button type="submit">Start</button>
+  </form>
 </div>
 
+<div *ngIf="playerName">
+  <table class="game-field">
+    <tr *ngFor="let row of values; let rowIndex = index">
+      <td *ngFor="let tile of row; let colIndex = index"
+          [ngClass]="{'empty': tile === '0', 'tile': tile !== '0'}"
+          [class]="'frame-' + frameNumbers[rowIndex][colIndex]">
+        <span *ngIf="tile !== '0'">{{ tile }}</span>
+      </td>
+    </tr>
+  </table>
+
+  <!--todo нормально стилизовать тексты-->
+  <div *ngIf="isSolved">
+    <h2>Congratulations! You solved the puzzle!</h2>
+  </div>
+
+  <div class="controls">
+    <div class="control-container">
+      <button (click)="moveTile('w')" class="control-btn up"></button>
+      <button (click)="moveTile('a')" class="control-btn left"></button>
+      <button (click)="moveTile('s')" class="control-btn down"></button>
+      <button (click)="moveTile('d')" class="control-btn right"></button>
+      <button (click)="reset()" class="control-btn center"></button>
+    </div>
+  </div>
+</div>

@@ -1,28 +1,87 @@
-import { Component } from '@angular/core';
-import {Observable} from 'rxjs';
-import {GameComment} from './components/models/comment';
-import {CommentsService} from './components/services/comment.service';
-import {ProductComponent} from './components/commetns/comment.component';
-import {AsyncPipe, NgForOf, NgIf} from '@angular/common';
+import {Component, OnInit} from '@angular/core';
+import {GameService} from './components/services/game.service';
+import {NgClass, NgForOf, NgIf} from '@angular/common';
+import {FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   imports: [
-    ProductComponent,
+    FormsModule,
     NgIf,
+    NgClass,
     NgForOf,
-    AsyncPipe
   ],
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'picture_sliding';
-  comments$: Observable<GameComment[]>;
 
-  constructor(private commentsService: CommentsService) {}
+  values: string[][] = [];
+  frameNumbers: number[][] = [];
+  isSolved: boolean;
+  rating: number;
+  player_rating: number;
+  playerName: string;
+  tempName: string;
 
-  ngOnInit(): void {
-    this.comments$ = this.commentsService.getAll()
+  constructor(private gameService: GameService) {}
+
+  ngOnInit() {
+    this.gameService.getGameState(undefined, undefined, this.playerName, undefined, undefined)
+      .subscribe(
+        (data) => {
+          this.values = data.field;
+          this.frameNumbers = data.frameNumbers;
+          this.isSolved = data.isSolved;
+          this.rating = data.rating;
+          this.player_rating = data.player_rating;
+          this.playerName = data.playerName;
+        },
+      );
+  }
+
+  moveTile(direction: string): void {
+    this.gameService.getGameState(direction, false, this.playerName, undefined, undefined)
+      .subscribe(
+        (data) => {
+          this.values = data.field;
+          this.frameNumbers = data.frameNumbers;
+          this.isSolved = data.isSolved;
+          this.rating = data.rating;
+          this.player_rating = data.player_rating;
+          this.playerName = data.playerName;
+        },
+      );
+  }
+
+  reset(): void {
+    this.gameService.getGameState(undefined, true, this.playerName, undefined, undefined)
+      .subscribe(
+        (data) => {
+          this.values = data.field;
+          this.frameNumbers = data.frameNumbers;
+          this.isSolved = data.isSolved;
+          this.rating = data.rating;
+          this.player_rating = data.player_rating;
+          this.playerName = data.playerName;
+        },
+      );
+  }
+
+  setPlayerName(): void {
+    this.playerName = this.tempName;
+    localStorage.setItem('playerName', this.playerName); // Сохраняем в localStorage
+    this.gameService.getGameState(undefined, false, this.playerName, undefined, undefined)
+      .subscribe(
+        (data) => {
+          this.values = data.field;
+          this.frameNumbers = data.frameNumbers;
+          this.isSolved = data.isSolved;
+          this.rating = data.rating;
+          this.player_rating = data.player_rating;
+          this.playerName = data.playerName;
+        },
+      );
   }
 }
