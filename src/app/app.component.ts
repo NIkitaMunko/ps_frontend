@@ -18,7 +18,7 @@ import {FormsModule} from '@angular/forms';
 export class AppComponent implements OnInit {
   title = 'picture_sliding';
 
-  values: string[][] = [];
+  field: string[][] = [];
   frameNumbers: number[][] = [];
   isSolved: boolean;
   rating: number;
@@ -68,7 +68,7 @@ export class AppComponent implements OnInit {
     this.gameService.getGameState(params.direction, params.reset || false, this.player_name, params.comment, params.rating)
       .subscribe(
         (data) => {
-          this.values = data.field;
+          this.field = data.field;
           this.frameNumbers = data.frameNumbers;
           this.isSolved = data.isSolved;
           this.rating = data.rating;
