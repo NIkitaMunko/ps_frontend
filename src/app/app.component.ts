@@ -22,10 +22,15 @@ export class AppComponent implements OnInit {
   frameNumbers: number[][] = [];
   isSolved: boolean;
   rating: number;
+  comments: any[] = [];
+
+  player_name: string;
+  temp_name: string;
+
   player_rating: number;
-  playerName: string;
-  tempName: string;
-  currentRating: number = 0;
+  temp_rating: number = 0;
+
+  player_comment: string;
 
   constructor(private gameService: GameService) {
   }
@@ -43,19 +48,24 @@ export class AppComponent implements OnInit {
   }
 
   setPlayerName(): void {
-    this.playerName = this.tempName;
+    this.player_name = this.temp_name;
     this.loadGameData();
   }
 
   submitRating(): void {
-    if (this.currentRating > 10) this.currentRating = 10;
-    else if (this.currentRating < 1) this.currentRating = 1;
-    this.player_rating = this.currentRating;
+    if (this.temp_rating > 10) this.temp_rating = 10;
+    else if (this.temp_rating < 1) this.temp_rating = 1;
+    this.player_rating = this.temp_rating;
     this.loadGameData({rating: this.player_rating.toString()});
   }
 
+  submitComment(): void {
+    this.loadGameData({comment: this.player_comment});
+    this.player_comment = '';
+  }
+
   private loadGameData(params: { direction?: string; reset?: boolean; comment?: string; rating?: string; } = {}) {
-    this.gameService.getGameState(params.direction, params.reset || false, this.playerName, params.comment, params.rating)
+    this.gameService.getGameState(params.direction, params.reset || false, this.player_name, params.comment, params.rating)
       .subscribe(
         (data) => {
           this.values = data.field;
@@ -63,7 +73,8 @@ export class AppComponent implements OnInit {
           this.isSolved = data.isSolved;
           this.rating = data.rating;
           this.player_rating = data.player_rating;
-          this.playerName = data.playerName;
+          this.player_name = data.playerName;
+          this.comments = data.comments;
         },
       );
   }
