@@ -1,6 +1,6 @@
 import {Component, HostListener, OnInit} from '@angular/core';
 import {GameService} from './services/game.service';
-import {NgClass, NgForOf, NgIf} from '@angular/common';
+import {NgClass, NgForOf, NgIf, NgOptimizedImage} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {CommentComponent} from './components/comment/comment.component';
 import {RatingComponent} from './components/rating/rating.component';
@@ -20,12 +20,14 @@ import {ScoreComponent} from './components/score/score.component';
     RatingComponent,
     RegisterFormComponent,
     ControlsComponent,
-    ScoreComponent
+    ScoreComponent,
+    NgOptimizedImage
   ],
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit {
   directions: string[] = ['w', 'a', 's', 'd']
+  selectedImageSet: boolean = false;
 
   field: string[][] = [];
   frameNumbers: number[][] = [];
@@ -40,6 +42,12 @@ export class AppComponent implements OnInit {
 
   player_name: string;
   player_rating: number;
+
+  selectImageSet(set: string): void {
+    this.selectedImageSet = true;
+    for (let i = 1; i <= 8; i++)
+      document.documentElement.style.setProperty(`--frame-${i}`, `url('/assets/images/${set}/image_part_00${i.toString()}.jpg')`);
+  }
 
   constructor(private gameService: GameService) {
   }

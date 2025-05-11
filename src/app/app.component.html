@@ -3,7 +3,17 @@
   (playerNameSubmitted)="onPlayerNameSubmitted($event)"
 ></register-form>
 
-<div *ngIf="player_name">
+<div class="image-selector" *ngIf="player_name && !selectedImageSet">
+  <button (click)="selectImageSet('cat')">
+    <img ngSrc="/assets/images/cat/preview.jpg" alt="cat" height="736" width="736">
+  </button>
+
+  <button (click)="selectImageSet('cute_cat')">
+    <img ngSrc="/assets/images/cute_cat/preview.jpg" alt="cute_cat" height="735" width="736">
+  </button>
+</div>
+
+<div *ngIf="selectedImageSet">
   <table class="game-field">
     <tr *ngFor="let row of field; let rowIndex = index">
       <td *ngFor="let tile of row; let colIndex = index"
@@ -13,10 +23,6 @@
       </td>
     </tr>
   </table>
-
-  <div *ngIf="isSolved">
-    <h2>Congratulations! You solved the puzzle!</h2>
-  </div>
 
   <controls-component
     (onDirectionChange)="onDirectionSubmitted($event)"

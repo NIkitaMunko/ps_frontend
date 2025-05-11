@@ -33,41 +33,69 @@ h1, h2 {
 }
 
 .frame-1 {
-  background-image: url('/assets/images/cute_cat/image_part_001.jpg');
+  background-image: var(--frame-1);
   background-size: cover;
 }
 
 .frame-2 {
-  background-image: url('/assets/images/cute_cat/image_part_002.jpg');
+  background-image: var(--frame-2);
   background-size: cover;
 }
 
 .frame-3 {
-  background-image: url('/assets/images/cute_cat/image_part_003.jpg');
+  background-image: var(--frame-3);
   background-size: cover;
 }
 
 .frame-4 {
-  background-image: url('/assets/images/cute_cat/image_part_004.jpg');
+  background-image: var(--frame-4);
   background-size: cover;
 }
 
 .frame-5 {
-  background-image: url('/assets/images/cute_cat/image_part_005.jpg');
+  background-image: var(--frame-5);
   background-size: cover;
 }
 
 .frame-6 {
-  background-image: url('/assets/images/cute_cat/image_part_006.jpg');
+  background-image: var(--frame-6);
   background-size: cover;
 }
 
 .frame-7 {
-  background-image: url('/assets/images/cute_cat/image_part_007.jpg');
+  background-image: var(--frame-7);
   background-size: cover;
 }
 
 .frame-8 {
-  background-image: url('/assets/images/cute_cat/image_part_008.jpg');
+  background-image: var(--frame-8);
   background-size: cover;
+}
+
+.image-selector {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 20px 0;
+
+  button {
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s;
+
+    &:hover {
+      border-color: #666;
+      transform: scale(1.05);
+    }
+
+    img {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      display: block;
+    }
+  }
 }
