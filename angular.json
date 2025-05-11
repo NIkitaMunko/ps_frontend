@@ -39,7 +39,6 @@
             "styles": [
               "src/assets/css/stylesheet.css",
               "src/assets/css/buttons.css",
-              "src/assets/css/services/comments.css",
               "src/assets/css/services/rating.css",
               "src/assets/css/formStyle.css",
               "src/styles.scss"

@@ -1,0 +1,15 @@
+<div class="comments">
+  <h3>Comments</h3>
+  <div class="comment-container">
+    <div *ngFor="let comment of comments" class="comment-entry">
+      {{ comment.player }}: {{ comment.comment }}
+    </div>
+  </div>
+
+  <form (ngSubmit)="submitComment()" class="comment-form">
+    <br>
+    <label for="comment">Please, comment the game:</label>
+    <input type="text" id="comment" name="comment" placeholder="comment..." [(ngModel)]="playerComment" required>
+    <input type="submit" value="Submit">
+  </form>
+</div>

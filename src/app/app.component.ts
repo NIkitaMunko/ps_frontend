@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {GameService} from './components/services/game.service';
+import {GameService} from './services/game.service';
 import {DecimalPipe, NgClass, NgForOf, NgIf} from '@angular/common';
 import {FormsModule} from '@angular/forms';
+import { CommentComponent } from './components/comment/comment.component';
 
 @Component({
   selector: 'app-root',
@@ -12,6 +13,7 @@ import {FormsModule} from '@angular/forms';
     NgClass,
     NgForOf,
     DecimalPipe,
+    CommentComponent
   ],
   styleUrl: './app.component.scss'
 })
@@ -29,8 +31,6 @@ export class AppComponent implements OnInit {
 
   player_rating: number;
   temp_rating: number = 0;
-
-  player_comment: string;
 
   constructor(private gameService: GameService) {
   }
@@ -59,12 +59,11 @@ export class AppComponent implements OnInit {
     this.loadGameData({ rating: this.player_rating.toString(), field: this.field });
   }
 
-  submitComment(): void {
-    this.loadGameData({ comment: this.player_comment, field: this.field });
-    this.player_comment = '';
+  onCommentSubmitted(comment: string): void {
+    this.loadGameData({ comment, field: this.field });
   }
 
-  private loadGameData(params: { direction?: string; reset?: boolean; comment?: string; rating?: string; field?: string[][] } = {}) {
+  loadGameData(params: { direction?: string; reset?: boolean; comment?: string; rating?: string; field?: string[][] } = {}) {
     this.gameService.getGameState(params.direction, params.reset || false, this.player_name, params.comment, params.rating, params.field)
       .subscribe(
         (data) => {
