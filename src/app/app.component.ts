@@ -5,6 +5,7 @@ import {FormsModule} from '@angular/forms';
 import {CommentComponent} from './components/comment/comment.component';
 import {RatingComponent} from './components/rating/rating.component';
 import {RegisterFormComponent} from './components/register-form/register-form.component';
+import {ControlsComponent} from './components/controls/controls.component';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +17,8 @@ import {RegisterFormComponent} from './components/register-form/register-form.co
     NgForOf,
     CommentComponent,
     RatingComponent,
-    RegisterFormComponent
+    RegisterFormComponent,
+    ControlsComponent
   ],
   styleUrl: './app.component.scss'
 })
@@ -24,11 +26,11 @@ export class AppComponent implements OnInit {
   field: string[][] = [];
   frameNumbers: number[][] = [];
   isSolved: boolean;
+
   rating: number;
   comments: any[] = [];
 
   player_name: string;
-
   player_rating: number;
 
   constructor(private gameService: GameService) {
@@ -38,11 +40,11 @@ export class AppComponent implements OnInit {
     this.loadGameData();
   }
 
-  moveTile(direction: string): void {
+  onDirectionSubmitted(direction: string): void {
     this.loadGameData({direction, field: this.field});
   }
 
-  reset(): void {
+  onResetSubmitted(): void {
     this.loadGameData({reset: true});
   }
 
@@ -60,6 +62,7 @@ export class AppComponent implements OnInit {
     this.loadGameData({comment, field: this.field});
   }
 
+
   loadGameData(params: {
     direction?: string;
     reset?: boolean;
@@ -68,8 +71,7 @@ export class AppComponent implements OnInit {
     field?: string[][]
   } = {}) {
     this.gameService.getGameState(params.direction, params.reset || false, this.player_name, params.comment, params.rating, params.field)
-      .subscribe(
-        (data) => {
+      .subscribe((data) => {
           this.field = data.field;
           this.frameNumbers = data.frameNumbers;
           this.isSolved = data.isSolved;

@@ -18,15 +18,10 @@
     <h2>Congratulations! You solved the puzzle!</h2>
   </div>
 
-  <div class="controls">
-    <div class="control-container">
-      <button (click)="moveTile('w')" class="control-btn up"></button>
-      <button (click)="moveTile('a')" class="control-btn left"></button>
-      <button (click)="moveTile('s')" class="control-btn down"></button>
-      <button (click)="moveTile('d')" class="control-btn right"></button>
-      <button (click)="reset()" class="control-btn center"></button>
-    </div>
-  </div>
+  <controls-component
+    (onDirectionChange)="onDirectionSubmitted($event)"
+    (onReset)="onResetSubmitted()"
+  ></controls-component>
 
   <rating-component
     [rating]="rating"

@@ -37,7 +37,6 @@
               }
             ],
             "styles": [
-              "src/assets/css/buttons.css",
               "src/styles.scss"
             ],
             "scripts": [],
