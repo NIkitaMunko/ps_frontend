@@ -40,7 +40,7 @@ export class AppComponent implements OnInit {
   }
 
   moveTile(direction: string): void {
-    this.loadGameData({direction});
+    this.loadGameData({ direction, field: this.field });
   }
 
   reset(): void {
@@ -49,23 +49,23 @@ export class AppComponent implements OnInit {
 
   setPlayerName(): void {
     this.player_name = this.temp_name;
-    this.loadGameData();
+    this.loadGameData({ field: this.field });
   }
 
   submitRating(): void {
     if (this.temp_rating > 10) this.temp_rating = 10;
     else if (this.temp_rating < 1) this.temp_rating = 1;
     this.player_rating = this.temp_rating;
-    this.loadGameData({rating: this.player_rating.toString()});
+    this.loadGameData({ rating: this.player_rating.toString(), field: this.field });
   }
 
   submitComment(): void {
-    this.loadGameData({comment: this.player_comment});
+    this.loadGameData({ comment: this.player_comment, field: this.field });
     this.player_comment = '';
   }
 
-  private loadGameData(params: { direction?: string; reset?: boolean; comment?: string; rating?: string; } = {}) {
-    this.gameService.getGameState(params.direction, params.reset || false, this.player_name, params.comment, params.rating)
+  private loadGameData(params: { direction?: string; reset?: boolean; comment?: string; rating?: string; field?: string[][] } = {}) {
+    this.gameService.getGameState(params.direction, params.reset || false, this.player_name, params.comment, params.rating, params.field)
       .subscribe(
         (data) => {
           this.field = data.field;
