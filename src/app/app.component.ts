@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {GameService} from './services/game.service';
-import {DecimalPipe, NgClass, NgForOf, NgIf} from '@angular/common';
+import {NgClass, NgForOf, NgIf} from '@angular/common';
 import {FormsModule} from '@angular/forms';
-import { CommentComponent } from './components/comment/comment.component';
+import {CommentComponent} from './components/comment/comment.component';
+import {RatingComponent} from './components/rating/rating.component';
 
 @Component({
   selector: 'app-root',
@@ -12,8 +13,8 @@ import { CommentComponent } from './components/comment/comment.component';
     NgIf,
     NgClass,
     NgForOf,
-    DecimalPipe,
-    CommentComponent
+    CommentComponent,
+    RatingComponent
   ],
   styleUrl: './app.component.scss'
 })
@@ -30,7 +31,6 @@ export class AppComponent implements OnInit {
   temp_name: string;
 
   player_rating: number;
-  temp_rating: number = 0;
 
   constructor(private gameService: GameService) {
   }
@@ -40,7 +40,7 @@ export class AppComponent implements OnInit {
   }
 
   moveTile(direction: string): void {
-    this.loadGameData({ direction, field: this.field });
+    this.loadGameData({direction, field: this.field});
   }
 
   reset(): void {
@@ -49,21 +49,25 @@ export class AppComponent implements OnInit {
 
   setPlayerName(): void {
     this.player_name = this.temp_name;
-    this.loadGameData({ field: this.field });
+    this.loadGameData({field: this.field});
   }
 
-  submitRating(): void {
-    if (this.temp_rating > 10) this.temp_rating = 10;
-    else if (this.temp_rating < 1) this.temp_rating = 1;
-    this.player_rating = this.temp_rating;
-    this.loadGameData({ rating: this.player_rating.toString(), field: this.field });
+  onRatingSubmitted(player_rating: number): void {
+    this.player_rating = player_rating;
+    this.loadGameData({rating: player_rating.toString(), field: this.field});
   }
 
   onCommentSubmitted(comment: string): void {
-    this.loadGameData({ comment, field: this.field });
+    this.loadGameData({comment, field: this.field});
   }
 
-  loadGameData(params: { direction?: string; reset?: boolean; comment?: string; rating?: string; field?: string[][] } = {}) {
+  loadGameData(params: {
+    direction?: string;
+    reset?: boolean;
+    comment?: string;
+    rating?: string;
+    field?: string[][]
+  } = {}) {
     this.gameService.getGameState(params.direction, params.reset || false, this.player_name, params.comment, params.rating, params.field)
       .subscribe(
         (data) => {

@@ -1,0 +1,9 @@
+<div class="rating">
+  <h4>Avg. rating: <span>{{ rating | number:'1.1-1' }}</span></h4>
+
+  <form (ngSubmit)="submitRating()" class="rating-form">
+    <label for="rating"> Please, rate the game (1–10): <strong>{{ player_rating || '' }}</strong> </label>
+    <input type="number" id="rating" name="rating" [(ngModel)]="temp_rating" min="1" max="10" required>
+    <input type="submit" value="Submit">
+  </form>
+</div>
