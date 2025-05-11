@@ -19,23 +19,23 @@
 }
 
 .control-container {
-  display: inline-block; /* Контейнер занимает только необходимую ширину */
-  position: relative; /* Для позиционирования кнопок */
-  width: 200px; /* Задаем ширину контейнера (можешь подогнать под свои нужды) */
-  height: 200px; /* Высота контейнера */
+  display: inline-block;
+  position: relative;
+  width: 200px;
+  height: 200px;
   transform: translateX(-15px) translateY(20px);
 }
 
 .control-btn {
   width: 60px;
   height: 60px;
-  background-color: white; /* Белый фон кнопок */
+  background-color: white;
   display: inline-block;
   position: absolute;
-  background-size: contain; /* Изображение полностью вписывается в кнопку */
+  background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  text-decoration: none; /* Убираем подчеркивание */
+  text-decoration: none;
 }
 
 .up {

@@ -6,6 +6,7 @@ import {CommentComponent} from './components/comment/comment.component';
 import {RatingComponent} from './components/rating/rating.component';
 import {RegisterFormComponent} from './components/register-form/register-form.component';
 import {ControlsComponent} from './components/controls/controls.component';
+import {ScoreComponent} from './components/score/score.component';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +19,8 @@ import {ControlsComponent} from './components/controls/controls.component';
     CommentComponent,
     RatingComponent,
     RegisterFormComponent,
-    ControlsComponent
+    ControlsComponent,
+    ScoreComponent
   ],
   styleUrl: './app.component.scss'
 })
@@ -29,6 +31,10 @@ export class AppComponent implements OnInit {
 
   rating: number;
   comments: any[] = [];
+
+  scores: any[] = [];
+  best_player_score: number = 0;
+  temp_player_score: number = 1000;
 
   player_name: string;
   player_rating: number;
@@ -41,6 +47,7 @@ export class AppComponent implements OnInit {
   }
 
   onDirectionSubmitted(direction: string): void {
+    if (this.temp_player_score > 0) this.temp_player_score--;
     this.loadGameData({direction, field: this.field});
   }
 
@@ -69,8 +76,9 @@ export class AppComponent implements OnInit {
     comment?: string;
     rating?: string;
     field?: string[][]
+    score?: string
   } = {}) {
-    this.gameService.getGameState(params.direction, params.reset || false, this.player_name, params.comment, params.rating, params.field)
+    this.gameService.getGameState(params.direction, params.reset || false, this.player_name, params.comment, params.rating, params.field, params.score)
       .subscribe((data) => {
           this.field = data.field;
           this.frameNumbers = data.frameNumbers;
@@ -79,7 +87,34 @@ export class AppComponent implements OnInit {
           this.player_rating = data.player_rating;
           this.player_name = data.playerName;
           this.comments = data.comments;
+          this.scores = data.scores;
+
+          if (this.isSolved) {
+            this.onWin();
+          } else this.setPlayerBestScore();
         },
       );
+  }
+
+  setPlayerBestScore(): void {
+    const playerScores = this.scores.filter(score => score.player === this.player_name);
+
+    if (playerScores.length > 0) {
+      let highestScore = playerScores[0].points;
+
+      for (let i = 0; i < playerScores.length; i++) {
+        const currentScore = playerScores[i].points;
+        if (currentScore > highestScore) highestScore = currentScore;
+      }
+
+      this.best_player_score = highestScore;
+    } else
+      this.best_player_score = 0;
+  }
+
+  onWin(): void {
+    this.best_player_score = this.temp_player_score;
+    this.loadGameData({score: this.best_player_score.toString(), field: this.field, reset: true});
+    this.temp_player_score = 1000;
   }
 }
