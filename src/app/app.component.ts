@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {GameService} from './services/game.service';
 import {NgClass, NgForOf, NgIf} from '@angular/common';
 import {FormsModule} from '@angular/forms';
@@ -25,6 +25,8 @@ import {ScoreComponent} from './components/score/score.component';
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit {
+  directions: string[] = ['w', 'a', 's', 'd']
+
   field: string[][] = [];
   frameNumbers: number[][] = [];
   isSolved: boolean;
@@ -45,6 +47,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.loadGameData();
   }
+
 
   onDirectionSubmitted(direction: string): void {
     if (this.temp_player_score > 0) this.temp_player_score--;
@@ -116,5 +119,13 @@ export class AppComponent implements OnInit {
     this.best_player_score = this.temp_player_score;
     this.loadGameData({score: this.best_player_score.toString(), field: this.field, reset: true});
     this.temp_player_score = 1000;
+  }
+
+
+  @HostListener('document:keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent): void {
+    if (!this.player_name || this.isSolved || event.target instanceof HTMLInputElement) return;
+    const key = event.key.toLowerCase();
+    if (this.directions.includes(key)) this.onDirectionSubmitted(key);
   }
 }
