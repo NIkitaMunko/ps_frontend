@@ -1,0 +1,12 @@
+<div class="form-container" *ngIf="!player_name">
+  <form (ngSubmit)="setPlayerName()">
+    <label for="playerName">Please, enter your name:</label>
+    <input
+      type="text"
+      placeholder="name..."
+      name="pn"
+      [(ngModel)]="temp_name"
+    />
+    <button type="submit">Start</button>
+  </form>
+</div>

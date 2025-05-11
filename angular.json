@@ -38,7 +38,6 @@
             ],
             "styles": [
               "src/assets/css/buttons.css",
-              "src/assets/css/formStyle.css",
               "src/styles.scss"
             ],
             "scripts": [],

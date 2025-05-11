@@ -4,6 +4,7 @@ import {NgClass, NgForOf, NgIf} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {CommentComponent} from './components/comment/comment.component';
 import {RatingComponent} from './components/rating/rating.component';
+import {RegisterFormComponent} from './components/register-form/register-form.component';
 
 @Component({
   selector: 'app-root',
@@ -14,13 +15,12 @@ import {RatingComponent} from './components/rating/rating.component';
     NgClass,
     NgForOf,
     CommentComponent,
-    RatingComponent
+    RatingComponent,
+    RegisterFormComponent
   ],
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit {
-  title = 'picture_sliding';
-
   field: string[][] = [];
   frameNumbers: number[][] = [];
   isSolved: boolean;
@@ -28,7 +28,6 @@ export class AppComponent implements OnInit {
   comments: any[] = [];
 
   player_name: string;
-  temp_name: string;
 
   player_rating: number;
 
@@ -47,8 +46,8 @@ export class AppComponent implements OnInit {
     this.loadGameData({reset: true});
   }
 
-  setPlayerName(): void {
-    this.player_name = this.temp_name;
+  onPlayerNameSubmitted(player_name: string): void {
+    this.player_name = player_name;
     this.loadGameData({field: this.field});
   }
 
