@@ -62,9 +62,10 @@ export class AppComponent implements OnInit {
     if (this.isSolved) {
       this.best_player_score = this.temp_player_score;
       this.loadGameData({score: this.best_player_score.toString(), field: this.field, reset: true});
-      this.temp_player_score = 1000;
-    } else
+    } else {
       this.loadGameData({reset: true});
+    }
+    this.temp_player_score = 1000;
   }
 
   onPlayerNameSubmitted(player_name: string): void {
