@@ -1,9 +1,15 @@
 <div class="scores">
   <h4>Best Scores</h4>
-  <label class="best-score">Your best score: <span class="score-number">{{playerScore}}</span></label>
+  <label class="best-score">Your best score: <span class="score-number">{{ playerScore }}</span></label>
   <div class="score-container">
-    <div *ngFor="let score of scores" class="score-entry">
-      {{ score.player }}: {{ score.points }}
-    </div>
+
+    <table class="score-table">
+      <tr *ngFor="let score of scores">
+        <td>{{ score.player }}</td>
+        <td>{{ score.points }}</td>
+        <td>{{ formatDate(score.playedOn.toString()) }}</td>
+      </tr>
+    </table>
+
   </div>
 </div>

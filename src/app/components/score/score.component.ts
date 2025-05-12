@@ -6,7 +6,7 @@ import {NgForOf} from '@angular/common';
   selector: 'score-component',
   imports: [
     FormsModule,
-    NgForOf
+    NgForOf,
   ],
   templateUrl: './score.component.html',
   styleUrl: './score.component.scss'
@@ -14,4 +14,10 @@ import {NgForOf} from '@angular/common';
 export class ScoreComponent {
   @Input() scores: any[] = [];
   @Input() playerScore: number = 0;
+
+  formatDate(dateString: string): string {
+    const [date, time] = dateString.split('T');
+    return `${date.replaceAll("-", ".")} ${time.slice(0, 5)}`;
+  }
+
 }
