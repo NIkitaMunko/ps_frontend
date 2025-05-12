@@ -17,7 +17,10 @@ export class ScoreComponent {
 
   formatDate(dateString: string): string {
     const [date, time] = dateString.split('T');
-    return `${date.replaceAll("-", ".")} ${time.slice(0, 5)}`;
+    const [hours, minutes] = time.slice(0, 5).split(':');
+    let newHours = parseInt(hours) + 2;
+    if (newHours >= 24) newHours -= 24;
+    return `${date.replaceAll("-", ".")} ${newHours}:${minutes}`;
   }
 
 }
