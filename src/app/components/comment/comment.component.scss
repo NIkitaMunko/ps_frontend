@@ -1,8 +1,6 @@
 .comments {
   h3 {
     margin-top: 0;
-    font-size: 16px;
-    font-weight: bold;
   }
 
   position: absolute;
@@ -11,28 +9,13 @@
   width: 300px;
   background-color: #AEA0A0;
   padding: 15px;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 14px;
+  border-radius: 15px;
   color: #373535;
 }
 
-.comment-container {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-bottom: 10px;
-}
-
 .comment-entry {
-  :last-child {
-    border-bottom: none;
-  }
-
-  padding: 6px;
+  padding: 4px;
   border-bottom: 1px solid #000000;
-  font-size: 14px;
   color: #000000;
 }
 
@@ -45,17 +28,13 @@
     padding: 6px;
     border: 1px solid #000000;
     border-radius: 5px;
-    font-size: 14px;
   }
 
   input[type="submit"] {
     padding: 8px;
     background-color: #2f342f;
     color: #AEA0A0;
-    border: none;
     border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.2s ease-in-out;
   }
 
   input[type="submit"]:hover {
