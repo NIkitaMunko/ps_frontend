@@ -4,14 +4,21 @@ h1, h2 {
 
 .game-field {
   border-collapse: collapse;
-  margin: 20px auto;
+  margin: 30px auto;
+
+  position: relative;
+  z-index: 1;
+
+  td {
+    border: 3px solid #888585;
+  }
 }
 
 .empty {
   width: 60px;
   height: 60px;
   border: 1px solid #000;
-  background-color: #ccc;
+  background-color: #888585;
 }
 
 .tile {
@@ -27,7 +34,7 @@ h1, h2 {
   background-color: #f0f0f0;
 
   span {
-    color: black;
+    color: #ffffff;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   }
 }
