@@ -1,0 +1,13 @@
+<div class="image-selector" *ngIf="player_name && !selectedImageSet">
+  <button (click)="selectImageSet('cat')">
+    <img ngSrc="/assets/images/cat/preview.jpg" alt="cat" height="736" width="736">
+  </button>
+
+  <button (click)="selectImageSet('cute_cat')">
+    <img ngSrc="/assets/images/cute_cat/preview.jpg" alt="cute_cat" height="735" width="736">
+  </button>
+
+  <button (click)="selectImageSet('shrimp')">
+    <img ngSrc="/assets/images/shrimp/preview.jpg" alt="shrimp" height="627" width="735">
+  </button>
+</div>

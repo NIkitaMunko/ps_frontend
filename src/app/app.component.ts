@@ -7,6 +7,7 @@ import {RatingComponent} from './components/rating/rating.component';
 import {RegisterFormComponent} from './components/register-form/register-form.component';
 import {ControlsComponent} from './components/controls/controls.component';
 import {ScoreComponent} from './components/score/score.component';
+import {ImageSelectorComponent} from './components/image-selector/image-selector.component';
 
 @Component({
   selector: 'app-root',
@@ -21,13 +22,14 @@ import {ScoreComponent} from './components/score/score.component';
     RegisterFormComponent,
     ControlsComponent,
     ScoreComponent,
-    NgOptimizedImage
+    NgOptimizedImage,
+    ImageSelectorComponent
   ],
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit {
   directions: string[] = ['w', 'a', 's', 'd']
-  selectedImageSet: boolean = false;
+  selectedImageSet: string;
 
   field: string[][] = [];
   frameNumbers: number[][] = [];
@@ -42,12 +44,6 @@ export class AppComponent implements OnInit {
 
   player_name: string;
   player_rating: number;
-
-  selectImageSet(set: string): void {
-    this.selectedImageSet = true;
-    for (let i = 1; i <= 8; i++)
-      document.documentElement.style.setProperty(`--frame-${i}`, `url('/assets/images/${set}/image_part_00${i.toString()}.jpg')`);
-  }
 
   constructor(private gameService: GameService) {
   }
@@ -127,6 +123,12 @@ export class AppComponent implements OnInit {
     this.best_player_score = this.temp_player_score;
     this.loadGameData({score: this.best_player_score.toString(), field: this.field, reset: true});
     this.temp_player_score = 1000;
+  }
+
+  selectImageSet(set: string): void {
+    this.selectedImageSet = set;
+    for (let i = 1; i <= 8; i++)
+      document.documentElement.style.setProperty(`--frame-${i}`, `url('/assets/images/${set}/image_part_00${i.toString()}.jpg')`);
   }
 
 

@@ -71,23 +71,3 @@ h1, h2 {
   background-image: var(--frame-8);
   background-size: cover;
 }
-
-.image-selector {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-
-  button {
-    padding: 10px;
-
-    &:hover {
-      border-color: #3e3737;
-      transform: scale(1.05);
-    }
-
-    img {
-      width: 120px;
-      height: 120px;
-    }
-  }
-}
