@@ -7,6 +7,7 @@
 
   button {
     padding: 10px;
+    border-radius: 12px;
 
     &:hover {
       border-color: #3e3737;
@@ -14,8 +15,9 @@
     }
 
     img {
-      width: 120px;
-      height: 120px;
+      width: 200px;
+      height: 200px;
+      border-radius: 12px;
     }
   }
 }
