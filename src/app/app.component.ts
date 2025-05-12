@@ -22,7 +22,6 @@ import {ImageSelectorComponent} from './components/image-selector/image-selector
     RegisterFormComponent,
     ControlsComponent,
     ScoreComponent,
-    NgOptimizedImage,
     ImageSelectorComponent
   ],
   styleUrl: './app.component.scss'
