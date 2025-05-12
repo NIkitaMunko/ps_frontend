@@ -53,12 +53,18 @@ export class AppComponent implements OnInit {
 
 
   onDirectionSubmitted(direction: string): void {
+    if (this.isSolved) return;
     if (this.temp_player_score > 0) this.temp_player_score--;
     this.loadGameData({direction, field: this.field});
   }
 
   onResetSubmitted(): void {
-    this.loadGameData({reset: true});
+    if (this.isSolved) {
+      this.best_player_score = this.temp_player_score;
+      this.loadGameData({score: this.best_player_score.toString(), field: this.field, reset: true});
+      this.temp_player_score = 1000;
+    } else
+      this.loadGameData({reset: true});
   }
 
   onPlayerNameSubmitted(player_name: string): void {
@@ -119,9 +125,7 @@ export class AppComponent implements OnInit {
   }
 
   onWin(): void {
-    this.best_player_score = this.temp_player_score;
-    this.loadGameData({score: this.best_player_score.toString(), field: this.field, reset: true});
-    this.temp_player_score = 1000;
+
   }
 
   selectImageSet(set: string): void {
