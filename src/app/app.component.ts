@@ -24,6 +24,7 @@ import {ImageSelectorComponent} from './components/image-selector/image-selector
     ScoreComponent,
     ImageSelectorComponent
   ],
+  standalone: true,
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit {
@@ -42,6 +43,7 @@ export class AppComponent implements OnInit {
   temp_player_score: number = 1000;
 
   player_name: string;
+  player_pass: string;
   player_rating: number;
 
   constructor(private gameService: GameService) {
@@ -68,8 +70,10 @@ export class AppComponent implements OnInit {
     this.temp_player_score = 1000;
   }
 
-  onPlayerNameSubmitted(player_name: string): void {
-    this.player_name = player_name;
+  onPlayerNameSubmitted(player_data: { name: string; password: string }): void {
+    this.player_name = player_data.name;
+    this.player_pass = player_data.password
+
     this.loadGameData({field: this.field});
   }
 

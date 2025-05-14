@@ -4,6 +4,7 @@ import {Component, EventEmitter, Output} from '@angular/core';
   selector: 'controls-component',
   imports: [],
   templateUrl: './controls.component.html',
+  standalone: true,
   styleUrl: './controls.component.scss'
 })
 export class ControlsComponent {

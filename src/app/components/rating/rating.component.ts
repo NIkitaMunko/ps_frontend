@@ -9,6 +9,7 @@ import {FormsModule} from '@angular/forms';
     FormsModule
   ],
   templateUrl: './rating.component.html',
+  standalone: true,
   styleUrl: './rating.component.scss'
 })
 export class RatingComponent {

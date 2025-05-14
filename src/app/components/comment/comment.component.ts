@@ -6,6 +6,7 @@ import {NgForOf} from '@angular/common';
   selector: 'comment-component',
   imports: [FormsModule, NgForOf],
   templateUrl: './comment.component.html',
+  standalone: true,
   styleUrl: './comment.component.scss'
 })
 export class CommentComponent {

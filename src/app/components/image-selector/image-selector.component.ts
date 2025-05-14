@@ -8,6 +8,7 @@ import {NgIf, NgOptimizedImage} from '@angular/common';
     NgOptimizedImage
   ],
   templateUrl: './image-selector.component.html',
+  standalone: true,
   styleUrl: './image-selector.component.scss'
 })
 export class ImageSelectorComponent {

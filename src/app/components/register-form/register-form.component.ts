@@ -10,16 +10,21 @@ import {NgIf} from '@angular/common';
     ReactiveFormsModule
   ],
   templateUrl: './register-form.component.html',
+  standalone: true,
   styleUrl: './register-form.component.scss'
 })
 export class RegisterFormComponent {
   @Input() player_name: string;
-  @Output() playerNameSubmitted = new EventEmitter<string>();
+  @Output() playerDataSubmitted = new EventEmitter<{ name: string; password: string }>();
 
   temp_name: string;
+  temp_pass: string;
 
   setPlayerName(): void {
     this.player_name = this.temp_name;
-    this.playerNameSubmitted.emit(this.player_name);
+    this.playerDataSubmitted.emit({
+      name: this.temp_name,
+      password: this.temp_pass
+    });
   }
 }

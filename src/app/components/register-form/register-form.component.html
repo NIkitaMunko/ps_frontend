@@ -1,11 +1,21 @@
 <div class="form-container" *ngIf="!player_name">
   <form (ngSubmit)="setPlayerName()">
-    <label for="playerName">Please, enter your name:</label>
+    <label for="playerName">Name:</label>
     <input
+      id="playerName"
       type="text"
       placeholder="name..."
       name="pn"
       [(ngModel)]="temp_name"
+    />
+
+    <label for="playerPassword">Password:</label>
+    <input
+      id="playerPassword"
+      type="password"
+      placeholder="pass..."
+      name="ps"
+      [(ngModel)]="temp_pass"
     />
     <button type="submit">Start</button>
   </form>

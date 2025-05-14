@@ -9,6 +9,7 @@ import {NgForOf} from '@angular/common';
     NgForOf,
   ],
   templateUrl: './score.component.html',
+  standalone: true,
   styleUrl: './score.component.scss'
 })
 export class ScoreComponent {
