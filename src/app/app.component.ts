@@ -87,14 +87,7 @@ export class AppComponent implements OnInit {
   }
 
 
-  loadGameData(params: {
-    direction?: string;
-    reset?: boolean;
-    comment?: string;
-    rating?: string;
-    field?: string[][]
-    score?: string
-  } = {}) {
+  loadGameData(params: { direction?: string; reset?: boolean; comment?: string; rating?: string; field?: string[][]; score?: string } = {}) {
     this.gameService.getGameState(params.direction, params.reset || false, this.player_name, this.player_pass, params.comment, params.rating, params.field, params.score)
       .subscribe((data) => {
           this.field = data.field;
