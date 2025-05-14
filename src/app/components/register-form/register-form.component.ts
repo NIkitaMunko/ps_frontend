@@ -21,9 +21,21 @@ export class RegisterFormComponent {
   temp_pass: string;
 
   setPlayerName(): void {
-    this.player_name = this.temp_name;
+    const name = this.temp_name?.trim();
+    if (!name) {
+      this.player_name = 'guest';
+      this.playerDataSubmitted.emit({
+        name: 'guest',
+        password: ''
+      });
+      return;
+    }
+
+    if (!this.temp_pass?.trim()) return;
+
+    this.player_name = name;
     this.playerDataSubmitted.emit({
-      name: this.temp_name,
+      name,
       password: this.temp_pass
     });
   }

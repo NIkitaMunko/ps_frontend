@@ -70,7 +70,7 @@ export class AppComponent implements OnInit {
     this.temp_player_score = 1000;
   }
 
-  onPlayerNameSubmitted(player_data: { name: string; password: string }): void {
+  onPlayerDataSubmitted(player_data: { name: string; password: string }): void {
     this.player_name = player_data.name;
     this.player_pass = player_data.password
 
@@ -95,7 +95,7 @@ export class AppComponent implements OnInit {
     field?: string[][]
     score?: string
   } = {}) {
-    this.gameService.getGameState(params.direction, params.reset || false, this.player_name, params.comment, params.rating, params.field, params.score)
+    this.gameService.getGameState(params.direction, params.reset || false, this.player_name, this.player_pass, params.comment, params.rating, params.field, params.score)
       .subscribe((data) => {
           this.field = data.field;
           this.frameNumbers = data.frameNumbers;
@@ -103,6 +103,7 @@ export class AppComponent implements OnInit {
           this.rating = data.rating;
           this.player_rating = data.player_rating;
           this.player_name = data.playerName;
+          this.player_pass = data.playerPass;
           this.comments = data.comments;
           this.scores = data.scores;
 

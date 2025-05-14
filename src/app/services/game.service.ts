@@ -13,12 +13,13 @@ export class GameService {
   }
 
   getGameState(
-    direction: string = '', reset: boolean = false, playerName: string = '', comment: string = '', rating: string = '', field?: string[][], score: string = ''
+    direction: string = '', reset: boolean = false, playerName: string = '', playerPass: string = '', comment: string = '', rating: string = '', field?: string[][], score: string = ''
   ): Observable<any> {
     let params = new HttpParams()
       .set('direction', direction)
       .set('reset', reset.toString())
       .set('playerName', playerName)
+      .set('playerPass', playerPass)
       .set('comment', comment)
       .set('rating', rating)
       .set('score', score);
