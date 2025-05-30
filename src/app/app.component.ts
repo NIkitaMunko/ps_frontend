@@ -46,6 +46,9 @@ export class AppComponent implements OnInit {
   player_pass: string;
   player_rating: number;
 
+  timer: any;
+  timeout: number = 0;
+
   constructor(private gameService: GameService) {
   }
 
@@ -68,6 +71,8 @@ export class AppComponent implements OnInit {
       this.loadGameData({reset: true});
     }
     this.temp_player_score = 1000;
+    this.timeout = 0;
+    this.startTimer();
   }
 
   onPlayerDataSubmitted(player_data: { name: string; password: string }): void {
@@ -124,13 +129,21 @@ export class AppComponent implements OnInit {
   }
 
   onWin(): void {
-
+    clearInterval(this.timer);
   }
 
   selectImageSet(set: string): void {
+    this.startTimer();
     this.selectedImageSet = set;
     for (let i = 1; i <= 8; i++)
       document.documentElement.style.setProperty(`--frame-${i}`, `url('/assets/images/${set}/image_part_00${i.toString()}.jpg')`);
+  }
+
+  startTimer(): void {
+    this.timer = setInterval(() => {
+      this.timeout += 1
+      // console.log(this.timeout)
+    }, 1000);
   }
 
 

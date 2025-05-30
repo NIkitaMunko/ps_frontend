@@ -78,3 +78,10 @@ h1, h2 {
   background-image: var(--frame-8);
   background-size: cover;
 }
+
+.timer {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  color: red;
+}
